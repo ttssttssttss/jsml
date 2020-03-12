@@ -1,0 +1,3 @@
+#inldue <QDebug>
+
+class MainWindow
