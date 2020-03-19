@@ -16,8 +16,8 @@ CC            = gcc
 CXX           = g++
 DEFINES       = -DQT_NO_DEBUG -DQT_WEBENGINEWIDGETS_LIB -DQT_WEBENGINECORE_LIB -DQT_QUICK_LIB -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_WEBCHANNEL_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_POSITIONING_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-CXXFLAGS      = -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I. -I. -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtWebEngineWidgets -isystem /usr/include/qt5/QtWebEngineCore -isystem /usr/include/qt5/QtQuick -isystem /usr/include/qt5/QtPrintSupport -isystem /usr/include/qt5/QtWidgets -isystem /usr/include/qt5/QtGui -isystem /usr/include/qt5/QtWebChannel -isystem /usr/include/qt5/QtQml -isystem /usr/include/qt5/QtNetwork -isystem /usr/include/qt5/QtPositioning -isystem /usr/include/qt5/QtCore -I. -isystem /usr/include/libdrm -I/usr/lib64/qt5/mkspecs/linux-g++
+CXXFLAGS      = -pipe -O2 -std=gnu++11 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
+INCPATH       = -I. -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtWebEngineWidgets -isystem /usr/include/qt5/QtWebEngineCore -isystem /usr/include/qt5/QtQuick -isystem /usr/include/qt5/QtPrintSupport -isystem /usr/include/qt5/QtWidgets -isystem /usr/include/qt5/QtGui -isystem /usr/include/qt5/QtWebChannel -isystem /usr/include/qt5/QtQml -isystem /usr/include/qt5/QtNetwork -isystem /usr/include/qt5/QtPositioning -isystem /usr/include/qt5/QtCore -Iintermidiate -isystem /usr/include/libdrm -Iintermidiate -I/usr/lib64/qt5/mkspecs/linux-g++
 QMAKE         = /usr/lib64/qt5/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = jsml1.0.0
-DISTDIR = /home/troysung/sci/jsml/.tmp/jsml1.0.0
+DISTDIR = /home/troysung/sci/toB/simplebrowser/intermidiate/jsml1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1 -Wl,-rpath-link,/usr/lib64
 LIBS          = $(SUBLIBS) /usr/lib64/libQt5WebEngineWidgets.so /usr/lib64/libQt5WebEngineCore.so /usr/lib64/libQt5Quick.so /usr/lib64/libQt5PrintSupport.so /usr/lib64/libQt5Widgets.so /usr/lib64/libQt5Gui.so /usr/lib64/libQt5WebChannel.so /usr/lib64/libQt5Qml.so /usr/lib64/libQt5Network.so /usr/lib64/libQt5Positioning.so /usr/lib64/libQt5Core.so /usr/lib64/libGL.so -lpthread   
@@ -48,12 +48,39 @@ STRIP         = strip
 
 ####### Output directory
 
-OBJECTS_DIR   = ./
+OBJECTS_DIR   = intermidiate/
 
 ####### Files
 
-SOURCES       = main.cpp 
-OBJECTS       = main.o
+SOURCES       = browser.cpp \
+		browserwindow.cpp \
+		main.cpp \
+		tabwidget.cpp \
+		urllineedit.cpp \
+		webview.cpp \
+		webpage.cpp \
+		webpopupwindow.cpp qrc_simplebrowser.cpp \
+		intermidiate/moc_browserwindow.cpp \
+		intermidiate/moc_tabwidget.cpp \
+		intermidiate/moc_urllineedit.cpp \
+		intermidiate/moc_webview.cpp \
+		intermidiate/moc_webpage.cpp \
+		intermidiate/moc_webpopupwindow.cpp
+OBJECTS       = intermidiate/browser.o \
+		intermidiate/browserwindow.o \
+		intermidiate/main.o \
+		intermidiate/tabwidget.o \
+		intermidiate/urllineedit.o \
+		intermidiate/webview.o \
+		intermidiate/webpage.o \
+		intermidiate/webpopupwindow.o \
+		intermidiate/qrc_simplebrowser.o \
+		intermidiate/moc_browserwindow.o \
+		intermidiate/moc_tabwidget.o \
+		intermidiate/moc_urllineedit.o \
+		intermidiate/moc_webview.o \
+		intermidiate/moc_webpage.o \
+		intermidiate/moc_webpopupwindow.o
 DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib64/qt5/mkspecs/common/unix.conf \
 		/usr/lib64/qt5/mkspecs/common/linux.conf \
@@ -157,6 +184,7 @@ DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib64/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib64/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib64/qt5/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/lib64/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib64/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib64/qt5/mkspecs/features/default_pre.prf \
@@ -175,7 +203,20 @@ DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib64/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib64/qt5/mkspecs/features/yacc.prf \
 		/usr/lib64/qt5/mkspecs/features/lex.prf \
-		jsml.pro  main.cpp
+		jsml.pro browser.h \
+		browserwindow.h \
+		tabwidget.h \
+		urllineedit.h \
+		webview.h \
+		webpage.h \
+		webpopupwindow.h browser.cpp \
+		browserwindow.cpp \
+		main.cpp \
+		tabwidget.cpp \
+		urllineedit.cpp \
+		webview.cpp \
+		webpage.cpp \
+		webpopupwindow.cpp
 QMAKE_TARGET  = jsml
 DESTDIR       = 
 TARGET        = jsml
@@ -184,7 +225,7 @@ TARGET        = jsml
 first: all
 ####### Build rules
 
-jsml:  $(OBJECTS)  
+jsml: intermidiate/ui_certificateerrordialog.h intermidiate/ui_passworddialog.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: jsml.pro /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
@@ -290,6 +331,7 @@ Makefile: jsml.pro /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf /usr/lib64/qt5/mk
 		/usr/lib64/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib64/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib64/qt5/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/lib64/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib64/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib64/qt5/mkspecs/features/default_pre.prf \
@@ -308,7 +350,8 @@ Makefile: jsml.pro /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf /usr/lib64/qt5/mk
 		/usr/lib64/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib64/qt5/mkspecs/features/yacc.prf \
 		/usr/lib64/qt5/mkspecs/features/lex.prf \
-		jsml.pro
+		jsml.pro \
+		data/simplebrowser.qrc
 	$(QMAKE) -o Makefile jsml.pro
 /usr/lib64/qt5/mkspecs/features/spec_pre.prf:
 /usr/lib64/qt5/mkspecs/common/unix.conf:
@@ -413,6 +456,7 @@ Makefile: jsml.pro /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf /usr/lib64/qt5/mk
 /usr/lib64/qt5/mkspecs/features/qt_config.prf:
 /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf:
 /usr/lib64/qt5/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /usr/lib64/qt5/mkspecs/features/exclusive_builds.prf:
 /usr/lib64/qt5/mkspecs/features/toolchain.prf:
 /usr/lib64/qt5/mkspecs/features/default_pre.prf:
@@ -432,6 +476,7 @@ Makefile: jsml.pro /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf /usr/lib64/qt5/mk
 /usr/lib64/qt5/mkspecs/features/yacc.prf:
 /usr/lib64/qt5/mkspecs/features/lex.prf:
 jsml.pro:
+data/simplebrowser.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile jsml.pro
 
@@ -446,8 +491,11 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents data/simplebrowser.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib64/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents browser.h browserwindow.h tabwidget.h urllineedit.h webview.h webpage.h webpopupwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents browser.cpp browserwindow.cpp main.cpp tabwidget.cpp urllineedit.cpp webview.cpp webpage.cpp webpopupwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents certificateerrordialog.ui passworddialog.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -471,34 +519,151 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_simplebrowser.cpp
 compiler_rcc_clean:
-compiler_moc_predefs_make_all: moc_predefs.h
-compiler_moc_predefs_clean:
-	-$(DEL_FILE) moc_predefs.h
-moc_predefs.h: /usr/lib64/qt5/mkspecs/features/data/dummy.cpp
-	g++ -pipe -O2 -Wall -W -dM -E -o moc_predefs.h /usr/lib64/qt5/mkspecs/features/data/dummy.cpp
+	-$(DEL_FILE) qrc_simplebrowser.cpp
+qrc_simplebrowser.cpp: data/simplebrowser.qrc \
+		/usr/lib64/qt5/bin/rcc \
+		data/closetab.png \
+		data/process-stop.png \
+		data/view-refresh.png \
+		data/go-previous.png \
+		data/defaulticon.png \
+		data/go-next.png \
+		data/simplebrowser.svg \
+		data/addtab.png
+	/usr/lib64/qt5/bin/rcc -name simplebrowser data/simplebrowser.qrc -o qrc_simplebrowser.cpp
 
-compiler_moc_header_make_all:
+compiler_moc_predefs_make_all: intermidiate/moc_predefs.h
+compiler_moc_predefs_clean:
+	-$(DEL_FILE) intermidiate/moc_predefs.h
+intermidiate/moc_predefs.h: /usr/lib64/qt5/mkspecs/features/data/dummy.cpp
+	g++ -pipe -O2 -std=gnu++11 -Wall -W -dM -E -o intermidiate/moc_predefs.h /usr/lib64/qt5/mkspecs/features/data/dummy.cpp
+
+compiler_moc_header_make_all: intermidiate/moc_browserwindow.cpp intermidiate/moc_tabwidget.cpp intermidiate/moc_urllineedit.cpp intermidiate/moc_webview.cpp intermidiate/moc_webpage.cpp intermidiate/moc_webpopupwindow.cpp
 compiler_moc_header_clean:
+	-$(DEL_FILE) intermidiate/moc_browserwindow.cpp intermidiate/moc_tabwidget.cpp intermidiate/moc_urllineedit.cpp intermidiate/moc_webview.cpp intermidiate/moc_webpage.cpp intermidiate/moc_webpopupwindow.cpp
+intermidiate/moc_browserwindow.cpp: browserwindow.h \
+		intermidiate/moc_predefs.h \
+		/usr/lib64/qt5/bin/moc
+	/usr/lib64/qt5/bin/moc $(DEFINES) --include /home/troysung/sci/toB/simplebrowser/intermidiate/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/troysung/sci/toB/simplebrowser -I/usr/include/qt5 -I/usr/include/qt5/QtWebEngineWidgets -I/usr/include/qt5/QtWebEngineCore -I/usr/include/qt5/QtQuick -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtWebChannel -I/usr/include/qt5/QtQml -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtPositioning -I/usr/include/qt5/QtCore -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include/g++-v9 -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include/g++-v9/x86_64-pc-linux-gnu -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include/g++-v9/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed -I/usr/include browserwindow.h -o intermidiate/moc_browserwindow.cpp
+
+intermidiate/moc_tabwidget.cpp: tabwidget.h \
+		intermidiate/moc_predefs.h \
+		/usr/lib64/qt5/bin/moc
+	/usr/lib64/qt5/bin/moc $(DEFINES) --include /home/troysung/sci/toB/simplebrowser/intermidiate/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/troysung/sci/toB/simplebrowser -I/usr/include/qt5 -I/usr/include/qt5/QtWebEngineWidgets -I/usr/include/qt5/QtWebEngineCore -I/usr/include/qt5/QtQuick -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtWebChannel -I/usr/include/qt5/QtQml -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtPositioning -I/usr/include/qt5/QtCore -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include/g++-v9 -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include/g++-v9/x86_64-pc-linux-gnu -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include/g++-v9/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed -I/usr/include tabwidget.h -o intermidiate/moc_tabwidget.cpp
+
+intermidiate/moc_urllineedit.cpp: urllineedit.h \
+		intermidiate/moc_predefs.h \
+		/usr/lib64/qt5/bin/moc
+	/usr/lib64/qt5/bin/moc $(DEFINES) --include /home/troysung/sci/toB/simplebrowser/intermidiate/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/troysung/sci/toB/simplebrowser -I/usr/include/qt5 -I/usr/include/qt5/QtWebEngineWidgets -I/usr/include/qt5/QtWebEngineCore -I/usr/include/qt5/QtQuick -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtWebChannel -I/usr/include/qt5/QtQml -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtPositioning -I/usr/include/qt5/QtCore -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include/g++-v9 -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include/g++-v9/x86_64-pc-linux-gnu -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include/g++-v9/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed -I/usr/include urllineedit.h -o intermidiate/moc_urllineedit.cpp
+
+intermidiate/moc_webview.cpp: webview.h \
+		intermidiate/moc_predefs.h \
+		/usr/lib64/qt5/bin/moc
+	/usr/lib64/qt5/bin/moc $(DEFINES) --include /home/troysung/sci/toB/simplebrowser/intermidiate/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/troysung/sci/toB/simplebrowser -I/usr/include/qt5 -I/usr/include/qt5/QtWebEngineWidgets -I/usr/include/qt5/QtWebEngineCore -I/usr/include/qt5/QtQuick -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtWebChannel -I/usr/include/qt5/QtQml -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtPositioning -I/usr/include/qt5/QtCore -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include/g++-v9 -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include/g++-v9/x86_64-pc-linux-gnu -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include/g++-v9/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed -I/usr/include webview.h -o intermidiate/moc_webview.cpp
+
+intermidiate/moc_webpage.cpp: webpage.h \
+		intermidiate/moc_predefs.h \
+		/usr/lib64/qt5/bin/moc
+	/usr/lib64/qt5/bin/moc $(DEFINES) --include /home/troysung/sci/toB/simplebrowser/intermidiate/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/troysung/sci/toB/simplebrowser -I/usr/include/qt5 -I/usr/include/qt5/QtWebEngineWidgets -I/usr/include/qt5/QtWebEngineCore -I/usr/include/qt5/QtQuick -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtWebChannel -I/usr/include/qt5/QtQml -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtPositioning -I/usr/include/qt5/QtCore -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include/g++-v9 -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include/g++-v9/x86_64-pc-linux-gnu -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include/g++-v9/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed -I/usr/include webpage.h -o intermidiate/moc_webpage.cpp
+
+intermidiate/moc_webpopupwindow.cpp: webpopupwindow.h \
+		intermidiate/moc_predefs.h \
+		/usr/lib64/qt5/bin/moc
+	/usr/lib64/qt5/bin/moc $(DEFINES) --include /home/troysung/sci/toB/simplebrowser/intermidiate/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/troysung/sci/toB/simplebrowser -I/usr/include/qt5 -I/usr/include/qt5/QtWebEngineWidgets -I/usr/include/qt5/QtWebEngineCore -I/usr/include/qt5/QtQuick -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtWebChannel -I/usr/include/qt5/QtQml -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtPositioning -I/usr/include/qt5/QtCore -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include/g++-v9 -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include/g++-v9/x86_64-pc-linux-gnu -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include/g++-v9/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed -I/usr/include webpopupwindow.h -o intermidiate/moc_webpopupwindow.cpp
+
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all:
+compiler_uic_make_all: intermidiate/ui_certificateerrordialog.h intermidiate/ui_passworddialog.h
 compiler_uic_clean:
+	-$(DEL_FILE) intermidiate/ui_certificateerrordialog.h intermidiate/ui_passworddialog.h
+intermidiate/ui_certificateerrordialog.h: certificateerrordialog.ui \
+		/usr/lib64/qt5/bin/uic
+	/usr/lib64/qt5/bin/uic certificateerrordialog.ui -o intermidiate/ui_certificateerrordialog.h
+
+intermidiate/ui_passworddialog.h: passworddialog.ui \
+		/usr/lib64/qt5/bin/uic
+	/usr/lib64/qt5/bin/uic passworddialog.ui -o intermidiate/ui_passworddialog.h
+
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
 compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
-main.o: main.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
+intermidiate/browser.o: browser.cpp browser.h \
+		browserwindow.h \
+		webview.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o intermidiate/browser.o browser.cpp
+
+intermidiate/browserwindow.o: browserwindow.cpp browser.h \
+		browserwindow.h \
+		tabwidget.h \
+		urllineedit.h \
+		webview.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o intermidiate/browserwindow.o browserwindow.cpp
+
+intermidiate/main.o: main.cpp browser.h \
+		browserwindow.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o intermidiate/main.o main.cpp
+
+intermidiate/tabwidget.o: tabwidget.cpp tabwidget.h \
+		webpage.h \
+		webview.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o intermidiate/tabwidget.o tabwidget.cpp
+
+intermidiate/urllineedit.o: urllineedit.cpp urllineedit.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o intermidiate/urllineedit.o urllineedit.cpp
+
+intermidiate/webview.o: webview.cpp browser.h \
+		browserwindow.h \
+		tabwidget.h \
+		webpage.h \
+		webpopupwindow.h \
+		webview.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o intermidiate/webview.o webview.cpp
+
+intermidiate/webpage.o: webpage.cpp browserwindow.h \
+		tabwidget.h \
+		intermidiate/ui_certificateerrordialog.h \
+		intermidiate/ui_passworddialog.h \
+		webpage.h \
+		webview.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o intermidiate/webpage.o webpage.cpp
+
+intermidiate/webpopupwindow.o: webpopupwindow.cpp urllineedit.h \
+		webpage.h \
+		webpopupwindow.h \
+		webview.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o intermidiate/webpopupwindow.o webpopupwindow.cpp
+
+intermidiate/qrc_simplebrowser.o: qrc_simplebrowser.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o intermidiate/qrc_simplebrowser.o qrc_simplebrowser.cpp
+
+intermidiate/moc_browserwindow.o: intermidiate/moc_browserwindow.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o intermidiate/moc_browserwindow.o intermidiate/moc_browserwindow.cpp
+
+intermidiate/moc_tabwidget.o: intermidiate/moc_tabwidget.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o intermidiate/moc_tabwidget.o intermidiate/moc_tabwidget.cpp
+
+intermidiate/moc_urllineedit.o: intermidiate/moc_urllineedit.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o intermidiate/moc_urllineedit.o intermidiate/moc_urllineedit.cpp
+
+intermidiate/moc_webview.o: intermidiate/moc_webview.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o intermidiate/moc_webview.o intermidiate/moc_webview.cpp
+
+intermidiate/moc_webpage.o: intermidiate/moc_webpage.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o intermidiate/moc_webpage.o intermidiate/moc_webpage.cpp
+
+intermidiate/moc_webpopupwindow.o: intermidiate/moc_webpopupwindow.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o intermidiate/moc_webpopupwindow.o intermidiate/moc_webpopupwindow.cpp
 
 ####### Install
 
