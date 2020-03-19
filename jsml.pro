@@ -23,12 +23,11 @@ SOURCES += \
     webpopupwindow.cpp
 
 FORMS += \
-    certificateerrordialog.ui \
-    passworddialog.ui
 
 RESOURCES += data/simplebrowser.qrc
 
 MOC_DIR = ./intermidiate
 OBJECTS_DIR = ./intermidiate
 UI_DIR = ./intermidiate
+RCC_DIR = ./intermidiate
 

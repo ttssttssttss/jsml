@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QWebEnginePage>
+#include <QComboBox>
+#include <QtDebug>
 
 QT_BEGIN_NAMESPACE
 class QProgressBar;
@@ -25,37 +27,27 @@ public:
 
     void loadPage(const QString &url);
     void loadPage(const QUrl &url);
-    void loadHomePage();
 
 protected:
     void closeEvent(QCloseEvent *event) override;
 
 private slots:
-    void handleNewWindowTriggered();
     void handleFileOpenTriggered();
     void handleShowWindowTriggered();
-    void handleWebViewLoadProgress(int);
     void handleWebViewTitleChanged(const QString &title);
+    void handleComboIndexChanged(const QString &text);
     void handleWebViewUrlChanged(const QUrl &url);
     void handleWebViewIconChanged(const QIcon &icon);
     void handleWebActionEnabledChanged(QWebEnginePage::WebAction action, bool enabled);
 
 private:
-    QMenu *createFileMenu(TabWidget *tabWidget);
-    QMenu *createViewMenu(QToolBar *toolBar);
-    QMenu *createWindowMenu(TabWidget *tabWidget);
-    QMenu *createHelpMenu();
-    QToolBar *createToolBar();
+    QToolBar *createToolBar(QComboBox *opsCombo);
 
 private:
     TabWidget *m_tabWidget;
-    QProgressBar *m_progressBar;
     QAction *m_historyBackAction;
-    QAction *m_historyForwardAction;
-    QAction *m_stopAction;
-    QAction *m_reloadAction;
-    QAction *m_stopReloadAction;
     UrlLineEdit *m_urlLineEdit;
+		QComboBox *opsCombo;
 };
 
 #endif // BROWSERWINDOW_H

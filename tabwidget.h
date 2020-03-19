@@ -22,7 +22,6 @@ public:
 
 signals:
     // current tab/page signals
-    void linkHovered(const QString &link);
     void loadProgress(int progress);
     void titleChanged(const QString &title);
     void urlChanged(const QUrl &url);

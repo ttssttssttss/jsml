@@ -126,10 +126,6 @@ void TabWidget::setupView(WebView *webView)
         if (currentIndex() == indexOf(webView))
             emit loadProgress(progress);
     });
-    connect(webPage, &QWebEnginePage::linkHovered, [this, webView](const QString &url) {
-        if (currentIndex() == indexOf(webView))
-            emit linkHovered(url);
-    });
     connect(webPage, &WebPage::iconChanged, [this, webView](const QIcon &icon) {
         int index = indexOf(webView);
         QIcon ico = icon.isNull() ? QIcon(QStringLiteral(":defaulticon.png")) : icon;

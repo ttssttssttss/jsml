@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_WebPage_t {
-    QByteArrayData data[8];
-    char stringdata0[114];
+    QByteArrayData data[1];
+    char stringdata0[8];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,20 +32,10 @@ struct qt_meta_stringdata_WebPage_t {
     )
 static const qt_meta_stringdata_WebPage_t qt_meta_stringdata_WebPage = {
     {
-QT_MOC_LITERAL(0, 0, 7), // "WebPage"
-QT_MOC_LITERAL(1, 8, 28), // "handleAuthenticationRequired"
-QT_MOC_LITERAL(2, 37, 0), // ""
-QT_MOC_LITERAL(3, 38, 10), // "requestUrl"
-QT_MOC_LITERAL(4, 49, 15), // "QAuthenticator*"
-QT_MOC_LITERAL(5, 65, 4), // "auth"
-QT_MOC_LITERAL(6, 70, 33), // "handleProxyAuthenticationRequ..."
-QT_MOC_LITERAL(7, 104, 9) // "proxyHost"
+QT_MOC_LITERAL(0, 0, 7) // "WebPage"
 
     },
-    "WebPage\0handleAuthenticationRequired\0"
-    "\0requestUrl\0QAuthenticator*\0auth\0"
-    "handleProxyAuthenticationRequired\0"
-    "proxyHost"
+    "WebPage"
 };
 #undef QT_MOC_LITERAL
 
@@ -55,35 +45,22 @@ static const uint qt_meta_data_WebPage[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       0,    0, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
        0,       // signalCount
 
- // slots: name, argc, parameters, tag, flags
-       1,    2,   24,    2, 0x08 /* Private */,
-       6,    3,   29,    2, 0x08 /* Private */,
-
- // slots: parameters
-    QMetaType::Void, QMetaType::QUrl, 0x80000000 | 4,    3,    5,
-    QMetaType::Void, QMetaType::QUrl, 0x80000000 | 4, QMetaType::QString,    3,    5,    7,
-
        0        // eod
 };
 
 void WebPage::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
-    if (_c == QMetaObject::InvokeMetaMethod) {
-        auto *_t = static_cast<WebPage *>(_o);
-        Q_UNUSED(_t)
-        switch (_id) {
-        case 0: _t->handleAuthenticationRequired((*reinterpret_cast< const QUrl(*)>(_a[1])),(*reinterpret_cast< QAuthenticator*(*)>(_a[2]))); break;
-        case 1: _t->handleProxyAuthenticationRequired((*reinterpret_cast< const QUrl(*)>(_a[1])),(*reinterpret_cast< QAuthenticator*(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3]))); break;
-        default: ;
-        }
-    }
+    Q_UNUSED(_o);
+    Q_UNUSED(_id);
+    Q_UNUSED(_c);
+    Q_UNUSED(_a);
 }
 
 QT_INIT_METAOBJECT const QMetaObject WebPage::staticMetaObject = { {
@@ -112,17 +89,6 @@ void *WebPage::qt_metacast(const char *_clname)
 int WebPage::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QWebEnginePage::qt_metacall(_c, _id, _a);
-    if (_id < 0)
-        return _id;
-    if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
-            qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
-    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
-            *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 2;
-    }
     return _id;
 }
 QT_WARNING_POP
