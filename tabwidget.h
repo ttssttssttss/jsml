@@ -26,7 +26,6 @@ signals:
     void titleChanged(const QString &title);
     void urlChanged(const QUrl &url);
     void iconChanged(const QIcon &icon);
-    void webActionEnabledChanged(QWebEnginePage::WebAction action, bool enabled);
 
 public slots:
     // current tab/page slots
@@ -35,16 +34,9 @@ public slots:
 
     WebView *createTab(bool makeCurrent = true);
     void closeTab(int index);
-    void nextTab();
-    void previousTab();
 
 private slots:
     void handleCurrentChanged(int index);
-    void handleContextMenuRequested(const QPoint &pos);
-    void cloneTab(int index);
-    void closeOtherTabs(int index);
-    void reloadAllTabs();
-    void reloadTab(int index);
 
 private:
     WebView *webView(int index) const;
