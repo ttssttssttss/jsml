@@ -21,7 +21,6 @@ class BrowserWindow : public QMainWindow
 public:
     BrowserWindow(QWidget *parent = nullptr, Qt::WindowFlags flags = 0);
     ~BrowserWindow();
-    QSize sizeHint() const override;
     TabWidget *tabWidget() const;
     WebView *currentTab() const;
 

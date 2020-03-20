@@ -10,7 +10,7 @@ HEADERS += \
     urllineedit.h \
     webview.h \
     webpage.h \
-    webpopupwindow.h
+#    webpopupwindow.h
 
 SOURCES += \
     browser.cpp \
@@ -20,7 +20,7 @@ SOURCES += \
     urllineedit.cpp \
     webview.cpp \
     webpage.cpp \
-    webpopupwindow.cpp
+#    webpopupwindow.cpp
 
 FORMS += \
 

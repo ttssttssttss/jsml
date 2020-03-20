@@ -12,23 +12,10 @@ class WebView : public QWebEngineView
 
 public:
     WebView(QWidget *parent = nullptr);
-    void setPage(WebPage *page);
-
-    int loadProgress() const;
-    bool isWebActionEnabled(QWebEnginePage::WebAction webAction) const;
 
 protected:
     void contextMenuEvent(QContextMenuEvent *event) override;
     QWebEngineView *createWindow(QWebEnginePage::WebWindowType type) override;
-
-signals:
-    void webActionEnabledChanged(QWebEnginePage::WebAction webAction, bool enabled);
-
-private:
-    void createWebActionTrigger(QWebEnginePage *page, QWebEnginePage::WebAction);
-
-private:
-    int m_loadProgress;
 };
 
 #endif

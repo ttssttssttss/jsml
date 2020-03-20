@@ -37,18 +37,10 @@ void TabWidget::handleCurrentChanged(int index)
         if (!view->url().isEmpty())
             view->setFocus();
         emit titleChanged(view->title());
-        emit loadProgress(view->loadProgress());
         emit urlChanged(view->url());
-        QIcon pageIcon = view->page()->icon();
-        if (!pageIcon.isNull())
-            emit iconChanged(pageIcon);
-        else
-            emit iconChanged(QIcon(QStringLiteral(":defaulticon.png")));
     } else {
         emit titleChanged(QString());
-        emit loadProgress(0);
         emit urlChanged(QUrl());
-        emit iconChanged(QIcon(QStringLiteral(":defaulticon.png")));
     }
 }
 
@@ -80,26 +72,6 @@ void TabWidget::setupView(WebView *webView)
             tabBar()->setTabData(index, url);
         if (currentIndex() == index)
             emit urlChanged(url);
-    });
-    connect(webView, &QWebEngineView::loadProgress, [this, webView](int progress) {
-        if (currentIndex() == indexOf(webView))
-            emit loadProgress(progress);
-    });
-    connect(webPage, &WebPage::iconChanged, [this, webView](const QIcon &icon) {
-        int index = indexOf(webView);
-        QIcon ico = icon.isNull() ? QIcon(QStringLiteral(":defaulticon.png")) : icon;
-
-        if (index != -1)
-            setTabIcon(index, ico);
-        if (currentIndex() == index)
-            emit iconChanged(ico);
-    });
-    connect(webView, &QWebEngineView::loadStarted, [this, webView]() {
-        int index = indexOf(webView);
-        if (index != -1) {
-            QIcon icon(QLatin1String(":view-refresh.png"));
-            setTabIcon(index, icon);
-        }
     });
     connect(webPage, &QWebEnginePage::windowCloseRequested, [this, webView]() {
         int index = indexOf(webView);

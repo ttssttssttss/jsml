@@ -22,10 +22,8 @@ public:
 
 signals:
     // current tab/page signals
-    void loadProgress(int progress);
     void titleChanged(const QString &title);
     void urlChanged(const QUrl &url);
-    void iconChanged(const QIcon &icon);
 
 public slots:
     // current tab/page slots

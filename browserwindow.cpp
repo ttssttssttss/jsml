@@ -60,21 +60,14 @@ BrowserWindow::~BrowserWindow()
 {
 }
 
-QSize BrowserWindow::sizeHint() const
-{
-    QRect desktopRect = QApplication::desktop()->screenGeometry();
-    QSize size = desktopRect.size() * qreal(0.9);
-    return size;
-}
-
 QToolBar *BrowserWindow::createToolBar(QComboBox *opsCombo)
 {
     QToolBar *navigationBar = new QToolBar(tr("Navigation"));
-    navigationBar->setAllowedAreas(Qt::TopToolBarArea | Qt::BottomToolBarArea);
+    navigationBar->setAllowedAreas(Qt::TopToolBarArea);
     navigationBar->toggleViewAction()->setEnabled(false);
 
     navigationBar->addWidget(m_urlLineEdit);
-		navigationBar->addWidget(opsCombo);
+//		navigationBar->addWidget(opsCombo);
 		
     int size = m_urlLineEdit->sizeHint().height();
     navigationBar->setIconSize(QSize(size, size));
