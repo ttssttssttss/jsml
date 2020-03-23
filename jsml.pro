@@ -31,4 +31,4 @@ OBJECTS_DIR = ./intermidiate
 UI_DIR = ./intermidiate
 RCC_DIR = ./intermidiate
 
-DESTDIR = /usr/local/bin
+#DESTDIR = /usr/local/bin

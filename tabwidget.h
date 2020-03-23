@@ -32,6 +32,7 @@ public slots:
 
     WebView *createTab(bool makeCurrent = true);
     void closeTab(int index);
+		void downloadRequested(QWebEngineDownloadItem * download);
 
 private slots:
     void handleCurrentChanged(int index);

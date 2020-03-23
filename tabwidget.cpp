@@ -19,9 +19,10 @@ TabWidget::TabWidget(QWidget *parent)
             return;
         createTab();
     });
-
-    setDocumentMode(true);
+    
+		setDocumentMode(true);
     setElideMode(Qt::ElideRight);
+		
 
     connect(this, &QTabWidget::currentChanged, this, &TabWidget::handleCurrentChanged);
 }
@@ -59,7 +60,8 @@ void TabWidget::setupView(WebView *webView)
 {
     QWebEnginePage *webPage = webView->page();
 
-    connect(webView, &QWebEngineView::titleChanged, [this, webView](const QString &title) {
+    connect(webView, &QWebEngineView::titleChanged, [this, webView](const QString &title_full) {
+				QString title=title_full.left(8);
         int index = indexOf(webView);
         if (index != -1)
             setTabText(index, title);
@@ -89,8 +91,13 @@ WebView *TabWidget::createTab(bool makeCurrent)
     addTab(webView, tr("(Untitled)"));
     if (makeCurrent)
         setCurrentWidget(webView);
+		connect(webPage->profile(), SIGNAL(downloadRequested(QWebEngineDownloadItem*)),this, SLOT(downloadRequested(QWebEngineDownloadItem*)));
     return webView;
 }
+void TabWidget::downloadRequested(QWebEngineDownloadItem * download){
+    download->accept();
+  }
+
 
 void TabWidget::closeTab(int index)
 {

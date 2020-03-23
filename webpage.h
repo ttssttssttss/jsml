@@ -9,6 +9,7 @@ class WebPage : public QWebEnginePage
 
 public:
     WebPage(QWebEngineProfile *profile, QObject *parent = nullptr);
+		//void downloadRequested(QWebEngineDownloadItem * download);
 };
 
 #endif // WEBPAGE_H

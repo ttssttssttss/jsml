@@ -65,6 +65,8 @@ QToolBar *BrowserWindow::createToolBar(QComboBox *opsCombo)
     QToolBar *navigationBar = new QToolBar(tr("Navigation"));
     navigationBar->setAllowedAreas(Qt::TopToolBarArea);
     navigationBar->toggleViewAction()->setEnabled(false);
+		navigationBar->setFloatable(false);
+		navigationBar->setMovable(false);
 
     navigationBar->addWidget(m_urlLineEdit);
 //		navigationBar->addWidget(opsCombo);
