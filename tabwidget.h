@@ -10,36 +10,35 @@ QT_END_NAMESPACE
 
 class WebView;
 
-class TabWidget : public QTabWidget
-{
-    Q_OBJECT
+class TabWidget : public QTabWidget {
+  Q_OBJECT
 
-public:
-    TabWidget(QWidget *parent = nullptr);
-    ~TabWidget();
+  public:
+  TabWidget(QWidget *parent = nullptr);
+  ~TabWidget();
 
-    WebView *currentWebView() const;
+  WebView *currentWebView() const;
 
-signals:
-    // current tab/page signals
-    void titleChanged(const QString &title);
-    void urlChanged(const QUrl &url);
+  signals:
+  // current tab/page signals
+  void titleChanged(const QString &title);
+  void urlChanged(const QUrl &url);
 
-public slots:
-    // current tab/page slots
-    void setUrl(const QUrl &url);
-    void triggerWebPageAction(QWebEnginePage::WebAction action);
+  public slots:
+  // current tab/page slots
+  void setUrl(const QUrl &url);
+  void triggerWebPageAction(QWebEnginePage::WebAction action);
 
-    WebView *createTab(bool makeCurrent = true);
-    void closeTab(int index);
-		void downloadRequested(QWebEngineDownloadItem * download);
+  WebView *createTab(bool makeCurrent = true);
+  void closeTab(int index);
+  void downloadRequested(QWebEngineDownloadItem *download);
 
-private slots:
-    void handleCurrentChanged(int index);
+  private slots:
+  void handleCurrentChanged(int index);
 
-private:
-    WebView *webView(int index) const;
-    void setupView(WebView *webView);
+  private:
+  WebView *webView(int index) const;
+  void setupView(WebView *webView);
 };
 
-#endif // TABWIDGET_H
+#endif	// TABWIDGET_H

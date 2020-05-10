@@ -6,16 +6,15 @@
 
 class WebPage;
 
-class WebView : public QWebEngineView
-{
-    Q_OBJECT
+class WebView : public QWebEngineView {
+  Q_OBJECT
 
-public:
-    WebView(QWidget *parent = nullptr);
+  public:
+  WebView(QWidget *parent = nullptr);
 
-protected:
-    void contextMenuEvent(QContextMenuEvent *event) override;
-    QWebEngineView *createWindow(QWebEnginePage::WebWindowType type) override;
+  protected:
+  void contextMenuEvent(QContextMenuEvent *event) override;
+  QWebEngineView *createWindow(QWebEnginePage::WebWindowType type) override;
 };
 
 #endif

@@ -5,17 +5,16 @@
 
 class BrowserWindow;
 
-class Browser
-{
-public:
-    ~Browser();
+class Browser {
+  public:
+  ~Browser();
 
-    QVector<BrowserWindow*> windows();
-    void addWindow(BrowserWindow* window);
-    static Browser &instance();
+  QVector<BrowserWindow*> windows();
+  void addWindow(BrowserWindow* window);
+  static Browser& instance();
 
-private:
-    Browser();
-    QVector<BrowserWindow*> m_windows;
+  private:
+  Browser();
+  QVector<BrowserWindow*> m_windows;
 };
-#endif // BROWSER_H
+#endif	// BROWSER_H

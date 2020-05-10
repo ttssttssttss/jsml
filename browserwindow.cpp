@@ -69,7 +69,7 @@ QToolBar *BrowserWindow::createToolBar(QComboBox *opsCombo)
 		navigationBar->setMovable(false);
 
     navigationBar->addWidget(m_urlLineEdit);
-//		navigationBar->addWidget(opsCombo);
+		navigationBar->addWidget(opsCombo);
 		
     int size = m_urlLineEdit->sizeHint().height();
     navigationBar->setIconSize(QSize(size, size));
