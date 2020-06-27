@@ -13,19 +13,17 @@ class WebView;
 class TabWidget : public QTabWidget {
   Q_OBJECT
 
-  public:
+public:
   TabWidget(QWidget *parent = nullptr);
   ~TabWidget();
 
   WebView *currentWebView() const;
 
-  signals:
-  // current tab/page signals
+signals:
   void titleChanged(const QString &title);
   void urlChanged(const QUrl &url);
 
-  public slots:
-  // current tab/page slots
+public slots:
   void setUrl(const QUrl &url);
   void triggerWebPageAction(QWebEnginePage::WebAction action);
 
@@ -33,12 +31,12 @@ class TabWidget : public QTabWidget {
   void closeTab(int index);
   void downloadRequested(QWebEngineDownloadItem *download);
 
-  private slots:
+private slots:
   void handleCurrentChanged(int index);
 
-  private:
+private:
   WebView *webView(int index) const;
   void setupView(WebView *webView);
 };
 
-#endif	// TABWIDGET_H
+#endif // TABWIDGET_H

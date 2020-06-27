@@ -17,21 +17,7 @@ QString getCommandLineUrlArgument() {
 }
 
 int main(int argc, char **argv) {
-  QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-  QCoreApplication::setAttribute(Qt::AA_UseSoftwareOpenGL);
-
   QApplication app(argc, argv);
-
-  /*   QNetworkProxy proxy; */
-  // proxy.setType(QNetworkProxy::Socks5Proxy);
-  // proxy.setHostName("10.0.2.2");
-  // proxy.setPort(1080);
-  // // proxy.setUser("username");
-  // // proxy.setPassword("password");
-  // QNetworkProxy::setApplicationProxy(proxy);
-
-  QWebEngineSettings::defaultSettings()->setAttribute(
-      QWebEngineSettings::PluginsEnabled, true);
 
   BrowserWindow *window = new BrowserWindow();
   Browser::instance().addWindow(window);

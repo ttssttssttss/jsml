@@ -11,14 +11,16 @@
 
 TabWidget::TabWidget(QWidget *parent) : QTabWidget(parent) {
   QTabBar *tabBar = this->tabBar();
-  tabBar->setTabsClosable(true);
   tabBar->setSelectionBehaviorOnRemove(QTabBar::SelectPreviousTab);
   tabBar->setMovable(true);
   tabBar->setContextMenuPolicy(Qt::CustomContextMenu);
+  tabBar->setStyleSheet("QTabBar::tab{background:transparent;color:white;};");
   connect(tabBar, &QTabBar::tabCloseRequested, this, &TabWidget::closeTab);
   connect(tabBar, &QTabBar::tabBarDoubleClicked, [this](int index) {
-    if (index != -1)
+    if (index != -1) {
+      closeTab(index);
       return;
+    }
     createTab();
   });
 
@@ -51,8 +53,6 @@ WebView *TabWidget::webView(int index) const {
 }
 
 void TabWidget::setupView(WebView *webView) {
-  QWebEnginePage *webPage = webView->page();
-
   connect(webView, &QWebEngineView::titleChanged,
           [this, webView](const QString &title_full) {
             QString title = title_full.left(8);
@@ -70,16 +70,14 @@ void TabWidget::setupView(WebView *webView) {
             if (currentIndex() == index)
               emit urlChanged(url);
           });
-  connect(webPage, &QWebEnginePage::windowCloseRequested, [this, webView]() {
-    int index = indexOf(webView);
-    if (index >= 0)
-      closeTab(index);
-  });
 }
 
 WebView *TabWidget::createTab(bool makeCurrent) {
   WebView *webView = new WebView;
   WebPage *webPage = new WebPage(QWebEngineProfile::defaultProfile(), webView);
+  webPage->setBackgroundColor(Qt::transparent);
+  webView->setAttribute(Qt::WA_TranslucentBackground);
+  webView->setStyleSheet("background:transparent");
   webView->setPage(webPage);
   setupView(webView);
   addTab(webView, tr("(Untitled)"));
@@ -110,6 +108,7 @@ void TabWidget::closeTab(int index) {
 void TabWidget::setUrl(const QUrl &url) {
   if (WebView *view = currentWebView()) {
     view->setUrl(url);
+    view->page()->setBackgroundColor(Qt::transparent);
     view->setFocus();
   }
 }

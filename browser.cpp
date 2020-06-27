@@ -20,10 +20,10 @@ Browser &Browser::instance() {
 QVector<BrowserWindow *> Browser::windows() { return m_windows; }
 
 void Browser::addWindow(BrowserWindow *mainWindow) {
-  if (m_windows.contains(mainWindow)) return;
+  if (m_windows.contains(mainWindow))
+    return;
   m_windows.prepend(mainWindow);
   QObject::connect(mainWindow, &QObject::destroyed,
-		   [this, mainWindow]() { m_windows.removeOne(mainWindow); });
+                   [this, mainWindow]() { m_windows.removeOne(mainWindow); });
   mainWindow->show();
 }
-

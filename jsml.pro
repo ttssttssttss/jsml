@@ -22,7 +22,7 @@ SOURCES += \
 
 FORMS += \
 
-RESOURCES += data/simplebrowser.qrc
+RESOURCES += res/jsml.qrc
 
 MOC_DIR = ./intermidiate
 OBJECTS_DIR = ./intermidiate

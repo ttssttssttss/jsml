@@ -9,11 +9,11 @@ class WebPage;
 class WebView : public QWebEngineView {
   Q_OBJECT
 
-  public:
+public:
   WebView(QWidget *parent = nullptr);
 
-  protected:
-  void contextMenuEvent(QContextMenuEvent *event) override;
+protected:
+  // void contextMenuEvent(QContextMenuEvent *event) override;
   QWebEngineView *createWindow(QWebEnginePage::WebWindowType type) override;
 };
 
