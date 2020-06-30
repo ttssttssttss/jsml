@@ -14,9 +14,9 @@
 	2. Download link was clicked, and things downloaded into ~/Downloads
 - screenshots
   - ![image](./res/screenshot1.png)
-	- ![image](./res/screenshot2.png)
-	- ![image](./res/screenshot3.png)
-	- ![image](./res/screenshot4.png)
+	 ![image](./res/screenshot2.png)
+	 ![image](./res/screenshot3.png)
+	 ![image](./res/screenshot4.png)
 
 #to-do
 - linux tested,windows need to be tested.
