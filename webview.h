@@ -1,7 +1,6 @@
 #ifndef WEBVIEW_H
 #define WEBVIEW_H
 
-#include <QIcon>
 #include <QWebEngineView>
 
 class WebPage;
@@ -13,7 +12,6 @@ public:
   WebView(QWidget *parent = nullptr);
 
 protected:
-  // void contextMenuEvent(QContextMenuEvent *event) override;
   QWebEngineView *createWindow(QWebEnginePage::WebWindowType type) override;
 };
 

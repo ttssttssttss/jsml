@@ -10,12 +10,12 @@ QT_END_NAMESPACE
 class UrlLineEdit : public QLineEdit {
   Q_OBJECT
 
-  public:
+public:
   UrlLineEdit(QWidget *parent = nullptr);
 
-  public:
+public:
   QUrl url() const;
   void setUrl(const QUrl &url);
 };
 
-#endif	// URLLINEEDIT_H
+#endif // URLLINEEDIT_H

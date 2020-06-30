@@ -1,5 +1,6 @@
 #include "browserwindow.h"
 #include "browser.h"
+#include "findlineedit.h"
 #include "tabwidget.h"
 #include "urllineedit.h"
 #include "webview.h"
@@ -16,7 +17,8 @@
 
 BrowserWindow::BrowserWindow(QWidget *parent, Qt::WindowFlags flags)
     : QMainWindow(parent, flags), m_tabWidget(new TabWidget(this)),
-      m_urlLineEdit(new UrlLineEdit(this)) {
+      m_urlLineEdit(new UrlLineEdit(this)),
+      findStrLineEdit(new FindLineEdit(this)) {
   setToolButtonStyle(Qt::ToolButtonFollowStyle);
   setAttribute(Qt::WA_DeleteOnClose, true);
   setStyleSheet(
@@ -26,6 +28,7 @@ BrowserWindow::BrowserWindow(QWidget *parent, Qt::WindowFlags flags)
   layout->setSpacing(0);
   layout->setMargin(0);
   layout->addWidget(m_tabWidget);
+  layout->addWidget(findStrLineEdit);
   centralWidget->setLayout(layout);
   setCentralWidget(centralWidget);
 
@@ -38,6 +41,8 @@ BrowserWindow::BrowserWindow(QWidget *parent, Qt::WindowFlags flags)
   m_tabWidget->createTab();
   statusBar()->close();
   menuBar()->close();
+  findStrLineEdit->hide();
+  connect(findStrLineEdit, SIGNAL(returnPressed()), this, SLOT(findStrFunc()));
 }
 
 BrowserWindow::~BrowserWindow() {}
@@ -53,6 +58,10 @@ void BrowserWindow::handleFileOpenTriggered() {
   if (file.isEmpty())
     return;
   loadPage(file);
+}
+
+void BrowserWindow::findStrFunc() {
+  currentTab()->findText(findStrLineEdit->text());
 }
 
 void BrowserWindow::loadPage(const QString &page) {
@@ -88,5 +97,10 @@ void BrowserWindow::keyPressEvent(QKeyEvent *event) {
     this->handleFileOpenTriggered();
   } else if (event->key() == Qt::Key_B) {
     m_tabWidget->triggerWebPageAction(QWebEnginePage::Back);
+  } else if (event->key() == Qt::Key_S) {
+    m_tabWidget->triggerWebPageAction(QWebEnginePage::ViewSource);
+  } else if (event->key() == Qt::Key_Slash) {
+    findStrLineEdit->show();
+    findStrLineEdit->setFocus();
   }
 }

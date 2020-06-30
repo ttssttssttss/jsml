@@ -76,8 +76,7 @@ WebView *TabWidget::createTab(bool makeCurrent) {
   WebView *webView = new WebView;
   WebPage *webPage = new WebPage(QWebEngineProfile::defaultProfile(), webView);
   webPage->setBackgroundColor(Qt::transparent);
-  webView->setAttribute(Qt::WA_TranslucentBackground);
-  webView->setStyleSheet("background:transparent");
+  // webView->setAttribute(Qt::WA_TranslucentBackground);
   webView->setPage(webPage);
   setupView(webView);
   addTab(webView, tr("(Untitled)"));

@@ -6,9 +6,8 @@
 class WebPage : public QWebEnginePage {
   Q_OBJECT
 
-  public:
+public:
   WebPage(QWebEngineProfile *profile, QObject *parent = nullptr);
-  // void downloadRequested(QWebEngineDownloadItem * download);
 };
 
-#endif	// WEBPAGE_H
+#endif // WEBPAGE_H

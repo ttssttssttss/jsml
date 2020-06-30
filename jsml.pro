@@ -8,6 +8,7 @@ HEADERS += \
     browserwindow.h \
     tabwidget.h \
     urllineedit.h \
+		findlineedit.h\
     webview.h \
     webpage.h \
 
@@ -17,12 +18,11 @@ SOURCES += \
     main.cpp \
     tabwidget.cpp \
     urllineedit.cpp \
+		findlineedit.cpp\
     webview.cpp \
     webpage.cpp \
 
 FORMS += \
-
-RESOURCES += res/jsml.qrc
 
 MOC_DIR = ./intermidiate
 OBJECTS_DIR = ./intermidiate

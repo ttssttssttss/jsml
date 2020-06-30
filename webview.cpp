@@ -24,10 +24,3 @@ QWebEngineView *WebView::createWindow(QWebEnginePage::WebWindowType type) {
   }
   return nullptr;
 }
-
-/* void WebView::contextMenuEvent(QContextMenuEvent *event) { */
-// QMenu *menu = page()->createStandardContextMenu();
-// //  menu->addAction("test");
-// connect(menu, &QMenu::aboutToHide, menu, &QObject::deleteLater);
-// menu->popup(event->globalPos());
-/* } */
