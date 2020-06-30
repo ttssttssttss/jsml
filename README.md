@@ -1,4 +1,4 @@
-##jsml - just a simple browser
+#jsml - just a simple browser
 - It`s very simple and beautiful web brower based on qtwebengine,no history, no configuration
 - Address input and web page tabs are in the same row. Below them are pure web page.
   1. Double click tabs, corresponding web page closed.
@@ -12,6 +12,11 @@
 - Download
   1. No progress bar
 	2. Download link was clicked, and things downloaded into ~/Downloads
+- screenshots
+  - ![image](./res/screenshot1.png)
+	- ![image](./res/screenshot2.png)
+	- ![image](./res/screenshot3.png)
+	- ![image](./res/screenshot4.png)
 
-##to-do
+#to-do
 - linux tested,windows need to be tested.
